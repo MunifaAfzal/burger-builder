@@ -1,9 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BurgerBuilder from './components/BurgerBuilder';
+import Login from './components/Login';
 
 function App() {
   return (
-    <div className="App">
+  <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index  element={<BurgerBuilder />} />
+          <Route path="Login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
+  );
+}
+
+export default App;
+
+/*   pre written code
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,8 +35,4 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
-  );
-}
-
-export default App;
+      */ 
