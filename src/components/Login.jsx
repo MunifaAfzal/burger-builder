@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Login.css";
-import { clear } from "@testing-library/user-event/dist/clear";
+import Navbar from './Navbar';
 
-function Login() {
+function Login({isLogin,setIsLogin} ) {
   
   const [inputs, setInputs] = useState({
        email:'',
@@ -18,67 +18,86 @@ function Login() {
   const [isToggle,setButtonToggle] = useState(true);
 
   const clearErrors = () => {
-    // Clear state values
     setErrors({ email: '', password: ''});
     setErrorDetail('');
   };
+  const missingEmailMsg = 'Email is required';
+  const invalidEmailMsg =  'Invalid email format';
+  const missingPasswordMsg = 'Password is required';
+  const invalidPasswordMsg = 'Password should be at least 6 characters';
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}));
-  //  formValidations(name);
+    //formValidations(name);
   }
 
   const handleSubmit = (event) => {
      event.preventDefault();
      clearErrors();
      for (const propName in inputs) {
+      console.log("formavalidation : " + propName);
       formValidations(propName);
-    }  
+    } 
+    if(!errorDetail) {
+      console.log("Login credential entered successfully with error" + errorDetail);
+      alert("Login credential entered successfully");
+      setIsLogin(true);
+    }
   }
 
   const handleSigIn = (event) => {
     event.preventDefault();
       setButtonToggle(!isToggle);
   }
-  const missingEmailMsg = 'Email is required';
-  const invalidEmailMsg =  'Invalid email format';
-  const missingPasswordMsg = 'Password is required';
-  const invalidPasswordMsg = 'Password should be at least 6 characters';
-  let  emailDetailMessage = '';
-  let  passwordDetailMessage = '';
 
+  useEffect(() => {
+    // This code will run whenever someState changes
+    console.log("Use effect called");
+    console.log(inputs);
+    console.log("error detail : " + errorDetail);
+    console.log(errors);
+     setErrorMessageDetails();
+  }, [errors]); 
+
+  const setErrorMessageDetails = () => {
+    let detailError = '';
+    //change errordetail message
+    if(errors.email===missingEmailMsg){
+      detailError = "MISSING_EMAIL";
+    }else if(errors.email===invalidEmailMsg){
+      detailError = 'INVALID_EMAIL';
+    }else if(errors.password===missingPasswordMsg){
+      detailError = 'MISSING_PASSWORD';
+    }else if(errors.password===invalidPasswordMsg){
+      detailError = 'WEAK_PASSWORD : ' + invalidPasswordMsg;
+    }  
+    console.log("detailError  " + detailError);
+    console.log("Initially Detail Error " + errorDetail);
+    setErrorDetail(detailError);  
+    console.log("After Set Detail Error " + errorDetail);
+  }
   const formValidations = (fieldName) => {  
     let error = '';
     if(fieldName==='password'){
       if (!inputs.password.trim()) {
         error = missingPasswordMsg;
-        passwordDetailMessage = 'MISSING_PASSWORD';
       }else if(inputs.password.length < 6){
         error = invalidPasswordMsg;
-        passwordDetailMessage = 'WEAK_PASSWORD : ' + invalidPasswordMsg;
       }
     }else  if(fieldName==='email'){
       if (!inputs.email.trim()) {
         error = missingEmailMsg;
-        emailDetailMessage = "MISSING_EMAIL";
       } else if (!/^\S+@\S+\.\S+$/.test(inputs.email)) {
         error = invalidEmailMsg;
-        emailDetailMessage = 'INVALIE_EMAIL';
       }
     } 
-    if (Object.keys(error).length === 0) {
-      // Valid form, submit data or perform further actions
-      console.log('Entered ' + fieldName + ':', inputs.$fieldName);
-    } else {
+    if (Object.keys(error).length !== 0) {
       // Invalid form, set errors
       console.log("Set Error " + error);
       setErrors(values => ({...values, [fieldName]: error}))
-      console.log("Initially Detail Error " + errorDetail);
-        !emailDetailMessage ?  setErrorDetail(emailDetailMessage) : setErrorDetail(passwordDetailMessage);  
-        console.log("After Set Detail Error " + errorDetail);
-        } 
+    }
   }
 
   return (

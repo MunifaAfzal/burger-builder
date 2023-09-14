@@ -9,7 +9,7 @@ import burgerCheese from './images/burger-cheese.png';
 import burgerMeat from './images/burger-meat.png';
 
 
-const BurgerBuilder = () => {
+function BurgerBuilder(){
 
 //#region   state properties  
   const prices = {
@@ -95,6 +95,13 @@ const BurgerBuilder = () => {
           setMeatImage(newBurgerParts);
       }
     };
+
+    const removeAllIngredientImages = () => {
+      setLettuceImage([]);
+      setBaconImage([]);
+      setCheeseImage([]);
+      setMeatImage([]);
+    };
 //#endregion    
 
 //#region Function to increment/decrement the count for a specific ingredient
@@ -111,10 +118,6 @@ const addIngredient = (ingredient,imagePath) => {
   console.log(ingredientCounts);
   console.log("Updated ingredient counts");
   console.log(ingredientCounts);
-  setIsButtonDisabled((prevConditions) => ({
-    ...prevConditions,
-    [ingredient]: false,
-  }));
   addPrice(ingredient); 
   console.log("Ingredient Added successfully");
 };
@@ -135,15 +138,23 @@ const removeIngredient = (ingredient) => {
     removePrice(ingredient);  
       
   }
-  if(ingredientCounts[ingredient]===0){
-    setIsButtonDisabled((prevConditions) => ({
-      ...prevConditions,
-      [ingredient]: true,
-    }));
-  }
    
 };
 
+// Function to decrement the count for a specific ingredient
+const removeAllIngredients = () => {
+  console.log("remove All ingredients called ");
+  for(let ingredient of Object.keys(ingredientCounts)){
+    console.log(ingredient  + " : " + ingredientCounts[ingredient]);
+    setIngredientCounts((prevCounts) => ({
+      ...prevCounts,
+      [ingredient]: 0,
+    }));
+   }
+   setPrice(prices['burger'].toFixed(2));
+   removeAllIngredientImages();
+};
+//#endregion
 const setlessIngredientButtonStatus = () => {
   console.log(" setlessIngredientButtonStatus called");
   for(let prop of Object.keys(ingredientCounts)){
@@ -152,6 +163,11 @@ const setlessIngredientButtonStatus = () => {
       setIsButtonDisabled((prevConditions) => ({
         ...prevConditions,
         [prop]: true,
+      }));
+    }else {
+      setIsButtonDisabled((prevConditions) => ({
+        ...prevConditions,
+        [prop]: false,
       }));
     }
    }
@@ -168,13 +184,7 @@ const setIsDisplayNoIngredientStatus = () => {
   }
 }
 
-useEffect(() => {
-  // This code will run whenever someState changes
-  console.log("Use effect called");
-  console.log(ingredientCounts);
-  setIsDisplayNoIngredientStatus();
-  setlessIngredientButtonStatus();
-}, [ingredientCounts]);
+
 //#endregion
 
 //#region Function to check if any ingredient is present 
@@ -210,6 +220,14 @@ const getCounter = (ingredient) => {
     }
 
 //#endregion    
+
+useEffect(() => {
+  // This code will run whenever someState changes
+  console.log("Use effect called");
+  console.log(ingredientCounts);
+  setIsDisplayNoIngredientStatus();
+  setlessIngredientButtonStatus();
+}, [ingredientCounts]);
     
     const Ingredient = (prop) =>{
       const lessbtn = "Less";
@@ -275,7 +293,12 @@ const getCounter = (ingredient) => {
          <Ingredient name="Bacon" imagePath={burgerBacon}/> 
          <Ingredient name="Cheese"  imagePath={burgerCheese}/> 
          <Ingredient name="Meat" imagePath={burgerMeat}/>
-          
+         <div > 
+            <button className='reset-burger-btn'
+                    onClick={removeAllIngredients}>
+                       REMOVE ALL INGREDIENTS
+            </button>
+          </div>
          <div > 
             <button className='sign-up-order-btn'
                     onClick={openLoginPage}>
@@ -287,11 +310,4 @@ const getCounter = (ingredient) => {
     );
   };
 
-  
-
- 
-
-
- 
-  
   export default BurgerBuilder;

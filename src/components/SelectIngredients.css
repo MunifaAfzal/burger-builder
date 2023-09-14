@@ -1,0 +1,38 @@
+.ingredients-section{
+    font-family: Open Sans,sans-serif;
+    background-color: #cf8f2e;
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.reset-burger-btn{
+    width:235px;
+    height:48px;
+    background-color:#dad735;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #966909;
+    color: #966909;
+    font-family: inherit;
+    font-size: 16px;
+    -webkit-box-shadow: 2px 2px 2px #966909;
+    box-shadow: 2px 2px 2px #966909;
+    margin:10px;
+}
+
+.sign-up-order-btn {
+    width:235px;
+    height:58px;
+    background-color: #dad735;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #966909;
+    color: #966909;
+    font-family: inherit;
+    font-size: 1.2em;
+    -webkit-box-shadow: 2px 2px 2px #966909;
+    box-shadow: 2px 2px 2px #966909;
+}
