@@ -1,0 +1,11 @@
+.green-button{
+    background-color: transparent;
+    border: none;
+    color: #5c9210;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: 700;
+}

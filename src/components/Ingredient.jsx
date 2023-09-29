@@ -5,6 +5,7 @@ export default function Ingredients({name,removeIngredient,
     addIngredient,getCounter }){
     const lessbtn = "Less";
     const morebtn = "More";
+    
        return (
         <React.Fragment>  
              <div className='ingredients-block'>

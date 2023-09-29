@@ -1,23 +1,35 @@
-import React,{useEffect, useState} from 'react';
-import SelectIngredients from './SelectIngredients';
-import BurgerImage from './BurgerImage';
+import React, { useEffect, useState } from "react";
+import SelectIngredients from "./SelectIngredients";
+import BurgerImage from "./BurgerImage";
 
-export default function BurgerBuilderBase(){
-    const [ingredientCounts, setIngredientCounts] = useState({
-        Lettuce: 0,
-        Cheese: 0,
-        Bacon: 0,
-        Meat: 0,
-      });
+export default function BurgerBuilderBase({
+  isLogin,
+  ingredients,
+  ingredientCounts,
+  setIngredientCounts,
+  removeAllIngredients,
+}) {
+  useEffect(() => {
+    console.log("BurgerBuilderBase use effect called");
+    console.log("login status: " + isLogin);
+    removeAllIngredients();
+  }, []);
 
-      useEffect( () => {
-        console.log("BurgerBuilderBase use effect called");
-      } ,[ingredientCounts]);
-
-    return(
-        <React.Fragment>
-            <BurgerImage ingredientCounts={ingredientCounts}> </BurgerImage>
-            <SelectIngredients ingredientCounts={ingredientCounts}  setIngredientCounts={setIngredientCounts} > </SelectIngredients>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <BurgerImage
+        ingredients={ingredients}
+        ingredientCounts={ingredientCounts}
+      >
+        {" "}
+      </BurgerImage>
+      <SelectIngredients
+        isLogin={isLogin}
+        ingredients={ingredients}
+        ingredientCounts={ingredientCounts}
+        setIngredientCounts={setIngredientCounts}
+        removeAllIngredients={removeAllIngredients}
+      ></SelectIngredients>
+    </React.Fragment>
+  );
 }

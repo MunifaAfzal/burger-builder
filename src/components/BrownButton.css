@@ -1,0 +1,11 @@
+.brown-button {
+    color: #944317;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: 700;
+}

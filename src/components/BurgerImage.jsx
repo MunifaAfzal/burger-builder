@@ -1,159 +1,156 @@
-import React , {useState,useEffect} from 'react';
-import './BurgerImage.css';
+import React, { useState, useEffect } from "react";
+import "./BurgerImage.css";
+import burgerBreadTop from "./images/burger-bread-top.png";
+import burgerBreadBottom from "./images/burger-bread-bottom.png";
+import burgerLettuce from "./images/burger-lettuce.png";
+import burgerBacon from "./images/burger-bacon.png";
+import burgerCheese from "./images/burger-cheese.png";
+import burgerMeat from "./images/burger-meat.png";
 
-import burgerBreadTop from './images/burger-bread-top.png';
-import burgerBreadBottom from './images/burger-bread-bottom.png';
-import burgerLettuce from './images/burger-lettuce.png';
-import burgerBacon from './images/burger-bacon.png';
-import burgerCheese from './images/burger-cheese.png';
-import burgerMeat from './images/burger-meat.png';
+export default function BurgerImage({ ingredients, ingredientCounts }) {
+  const Lettuce = "Lettuce";
+  const Bacon = "Bacon";
+  const Cheese = "Cheese";
+  const Meat = "Meat";
+  const [isDisplayNoIngredient, setIsDisplayNoIngredient] = useState(true);
+  const [previousImageCount, setPreviousImageCount] = useState({
+    Lettuce: 0,
+    Bacon: 0,
+    Cheese: 0,
+    Meat: 0,
+  });
 
-export default function BurgerImage({ingredientCounts}){
+  const [burgerpartsImages, setBurgerPartsImages] = useState({
+    Lettuce: [],
+    Bacon: [],
+    Cheese: [],
+    Meat: [],
+  });
 
-    
-    const[isDisplayNoIngredient,setIsDisplayNoIngredient] = useState(true);
+  const burgerPartClasses = {
+    Lettuce: "burger-parts-lettuce",
+    Bacon: "burger-parts",
+    Cheese: "burger-parts-Cheese",
+    Meat: "burger-parts",
+  };
 
-    //#region Function to check if any ingredient is present 
-    const anyIngredients = () => {
-    console.log("any Ingredients called");
-       for(let prop of Object.keys(ingredientCounts)){
-        console.log(prop  + " : " + ingredientCounts[prop]);
-          if(ingredientCounts[prop]!==0){
-            return true;
-          }
-       }
-       return false;
-  }
+  const updatePreviousImageCount = () => {
+    for (let ingredient of Object.keys(ingredientCounts)) {
+      if (ingredientCounts[ingredient] !== previousImageCount[ingredient]) {
+        setPreviousImageCount((previousImageCount) => ({
+          ...previousImageCount,
+          [ingredient]: ingredientCounts[ingredient],
+        }));
+      }
+    }
+  };
+
+  const updateBurgerImage = () => {
+    console.log("Update Burger Images");
+    for (let ingredient of Object.keys(previousImageCount)) {
+      console.log(
+        "Current Counts " + ingredient + " : " + ingredientCounts[ingredient]
+      );
+      console.log(
+        "Previous Counts " + ingredient + " : " + previousImageCount[ingredient]
+      );
+      if (ingredientCounts[ingredient] !== previousImageCount[ingredient]) {
+        console.log(
+          "updating   " +
+            ingredient +
+            "  image : " +
+            ingredientCounts[ingredient]
+        );
+        updateIngredientImage(ingredient, ingredientCounts[ingredient]);
+      }
+    }
+  };
+
+  const updateIngredientImage = (ingredient, counter) => {
+    console.log("updateIngredientImage called");
+    let ingredientImage = [];
+    let imagePath;
+    switch (ingredient) {
+      case Lettuce:
+        imagePath = burgerLettuce;
+        break;
+      case Cheese:
+        imagePath = burgerCheese;
+        break;
+      case Bacon:
+        imagePath = burgerBacon;
+        break;
+      case Meat:
+        imagePath = burgerMeat;
+        break;
+      default:
+        imagePath = "no path";
+        break;
+    }
+    //  console.log("After switch image path :" + imagePath);
+    for (let i = 0; i < counter; i++) {
+      ingredientImage.push(imagePath);
+    }
+    setBurgerPartsImages((burgerpartsImages) => ({
+      ...burgerpartsImages,
+      [ingredient]: ingredientImage,
+    }));
+  };
+  //#region No ingredient methods
+  const setIsDisplayNoIngredientStatus = () => {
+    !anyIngredients()
+      ? setIsDisplayNoIngredient(true)
+      : setIsDisplayNoIngredient(false);
+  };
+
+  const anyIngredients = () => {
+    for (let prop of Object.keys(ingredientCounts)) {
+      //  console.log(prop  + " : " + ingredientCounts[prop]);
+      if (ingredientCounts[prop] !== 0) {
+        return true;
+      }
+    }
+    return false;
+  };
   //#endregion
 
-    const setIsDisplayNoIngredientStatus = () => {
-        console.log(" setIsDisplayNoIngredientStatus called");
-        if(!anyIngredients()){
-          console.log("ingredient not present");
-          setIsDisplayNoIngredient(true);
-        }else{
-          console.log("ingredient present");
-          setIsDisplayNoIngredient(false);
-        }
-      }
+  useEffect(() => {
+    console.log("Burger image use effect called");
+    console.log(ingredientCounts);
+    setIsDisplayNoIngredientStatus();
+    updatePreviousImageCount();
+    updateBurgerImage();
+  }, [ingredientCounts, previousImageCount]);
 
-      const Lettuce = 'Lettuce';
-      const Bacon = 'Bacon';
-      const Cheese = 'Cheese';
-      const Meat = 'Meat';
-
-      const [lettuceImage, setLettuceImage] = useState([]); 
-      const [baconImage, setBaconImage] = useState([]); 
-      const [cheeseImage, setCheeseImage] = useState([]); 
-      const [meatImage, setMeatImage] = useState([]);
-
-      const addIngredientImage = (ingredient,counter) => {
-        let imagePath;
-        let setMethod;
-        let ingredientImage=[];
-        if(ingredient===Lettuce){
-            imagePath=burgerLettuce;
-            setMethod=setLettuceImage;
-          }else if(ingredient===Cheese){
-            imagePath=burgerCheese;
-            setMethod=setCheeseImage;
-          }else if(ingredient===Bacon){
-            imagePath=burgerBacon;
-            setMethod=setBaconImage;
-          }else if(ingredient===Meat){
-            imagePath=burgerMeat;
-            setMethod=setMeatImage;
-          }
-          for(let i = 0 ; i < counter ; i++){
-            ingredientImage.push(imagePath);
-          }
-          console.log(ingredientImage);
-          setMethod(ingredientImage);
-      }
-
-
-      const updateImage = () => {
-        for(let ingredient of Object.keys(ingredientCounts)){
-            console.log(ingredient  + " : " + ingredientCounts[ingredient]);
-              addIngredientImage(ingredient,ingredientCounts[ingredient])
-           }
-      };
-
-      const removeAllIngredientImages = () => {
-        setLettuceImage([]);
-        setBaconImage([]);
-        setCheeseImage([]);
-        setMeatImage([]);
-      };
-
-    useEffect( () => {
-        console.log("Burger image use effect called");
-        console.log(ingredientCounts);
-        setIsDisplayNoIngredientStatus();
-        removeAllIngredientImages();
-        if(anyIngredients()){
-            updateImage();
-        }
-      } ,[ingredientCounts]);
-
-    return (
-        <React.Fragment>
-        <div className='burger-container'>
-        <div className="burger"> 
-            <img className='burger-parts' src={burgerBreadTop}  alt="Burger Bread Top"/>
-
-            {lettuceImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-        {baconImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-        {cheeseImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-        {meatImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))}
-            {isDisplayNoIngredient  &&
-        <p className='no-ingredients'>
-             No Ingredients Added 
-        </p> }
-            <img src={burgerBreadBottom}  alt="Burger Bread Bottom"/>  
-            </div>
+  return (
+    <React.Fragment>
+      <div className="burger-container">
+        <div className="burger">
+          <img
+            className="burger-parts"
+            src={burgerBreadTop}
+            alt="Burger Bread Top"
+          />
+          {ingredients.map((ingredient) =>
+            burgerpartsImages[ingredient].map((part, index) => (
+              <img
+                className={burgerPartClasses[ingredient]}
+                key={index}
+                src={part}
+                alt={`Burger Part ${index}`}
+              />
+            ))
+          )}
+          {isDisplayNoIngredient && (
+            <p className="no-ingredients">No Ingredients Added</p>
+          )}
+          <img
+            className="burger-parts"
+            src={burgerBreadBottom}
+            alt="Burger Bread Bottom"
+          />
         </div>
-        </React.Fragment>
-    );
-
-}
-/*
-
-<div className='burger-container'>
-      <div className="burger"> 
-        <img className='burger-parts' src={burgerBreadTop}  alt="Burger Bread Top"/> 
-        
-		    
-        {lettuceImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-        {baconImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-        {cheeseImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-        {meatImage.map((part, index) => (
-           <img className='burger-parts' key={index} src={part} alt={`Burger Part ${index}`} />
-        ))} 
-
-        {isDisplayNoIngredient  &&
-        <p className='no-ingredients'>
-             No Ingredients Added 
-        </p> }
-        
-       <img src={burgerBreadBottom}  alt="Burger Bread Bottom"/> 
       </div>
-      
-    </div>
-
-
-*/
+    </React.Fragment>
+  );
+}

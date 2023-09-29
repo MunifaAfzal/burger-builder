@@ -8,9 +8,9 @@
     padding: 20px;
 }
 
-.reset-burger-btn{
+.button-style{
     width:235px;
-    height:48px;
+    height:58px;
     background-color:#dad735;
     outline: none;
     cursor: pointer;
@@ -23,16 +23,6 @@
     margin:10px;
 }
 
-.sign-up-order-btn {
-    width:235px;
-    height:58px;
-    background-color: #dad735;
-    outline: none;
-    cursor: pointer;
-    border: 1px solid #966909;
-    color: #966909;
-    font-family: inherit;
-    font-size: 1.2em;
-    -webkit-box-shadow: 2px 2px 2px #966909;
-    box-shadow: 2px 2px 2px #966909;
+.button-style:hover{
+    background-color:rgb(174, 203, 56);
 }

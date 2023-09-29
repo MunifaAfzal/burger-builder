@@ -1,56 +1,79 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import Navbar from './Navbar';
+import Navbar from "./Navbar";
 
-function Login({isLogin,setIsLogin} ) {
-  
+function Login({ isLogin, setIsLogin }) {
+  const noError = "";
   const [inputs, setInputs] = useState({
-       email:'',
-       password:''
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({
-      email: '',
-      password: '',
+    email: noError,
+    password: noError,
   });
 
-  const[errorDetail,setErrorDetail] = useState('');
-
-  const [isToggle,setButtonToggle] = useState(true);
+  let [errorDetail, setErrorDetail] = useState(noError);
+  let [isToggle, setButtonToggle] = useState(true);
 
   const clearErrors = () => {
-    setErrors({ email: '', password: ''});
-    setErrorDetail('');
+    setErrors((errors) => ({ ...errors, email: noError, password: noError }));
+    setErrorDetail((prevError) => (prevError = noError));
   };
-  const missingEmailMsg = 'Email is required';
-  const invalidEmailMsg =  'Invalid email format';
-  const missingPasswordMsg = 'Password is required';
-  const invalidPasswordMsg = 'Password should be at least 6 characters';
+  const missingEmailMsg = "Email is required";
+  const invalidEmailMsg = "Invalid email format";
+  const missingPasswordMsg = "Password is required";
+  const invalidPasswordMsg = "Password should be at least 6 characters";
+
+  let navigate = useNavigate();
+  const openBurgerBuilderPage = () => {
+    let path = `/`;
+    navigate(path);
+  };
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}));
+    setInputs((values) => ({ ...values, [name]: value }));
     //formValidations(name);
-  }
+  };
 
   const handleSubmit = (event) => {
-     event.preventDefault();
-     clearErrors();
-     for (const propName in inputs) {
+    event.preventDefault();
+    clearErrors();
+    for (const propName in inputs) {
       console.log("formavalidation : " + propName);
       formValidations(propName);
-    } 
-    if(!errorDetail) {
-      console.log("Login credential entered successfully with error" + errorDetail);
-      alert("Login credential entered successfully");
-      setIsLogin(true);
     }
-  }
+    loginAccount();
+  };
+
+  const loginAccount = () => {
+    console.log(inputs);
+    console.log(errors);
+    if (
+      errors.email === noError &&
+      errors.password === noError &&
+      inputs.email !== "" &&
+      inputs.password !== ""
+    ) {
+      /*alert(
+        "Login credential email: " +
+          inputs.email +
+          " and password : " +
+          inputs.password +
+          "  entered successfully"
+      );  */
+      setIsLogin(true);
+      openBurgerBuilderPage();
+    }
+  };
 
   const handleSigIn = (event) => {
     event.preventDefault();
-      setButtonToggle(!isToggle);
-  }
+    setButtonToggle(!isToggle);
+  };
 
   useEffect(() => {
     // This code will run whenever someState changes
@@ -58,86 +81,85 @@ function Login({isLogin,setIsLogin} ) {
     console.log(inputs);
     console.log("error detail : " + errorDetail);
     console.log(errors);
-     setErrorMessageDetails();
-  }, [errors]); 
+    setErrorMessageDetails();
+    loginAccount();
+  }, [errors]);
 
   const setErrorMessageDetails = () => {
-    let detailError = '';
+    let detailError = noError;
     //change errordetail message
-    if(errors.email===missingEmailMsg){
+    if (errors.email === missingEmailMsg) {
       detailError = "MISSING_EMAIL";
-    }else if(errors.email===invalidEmailMsg){
-      detailError = 'INVALID_EMAIL';
-    }else if(errors.password===missingPasswordMsg){
-      detailError = 'MISSING_PASSWORD';
-    }else if(errors.password===invalidPasswordMsg){
-      detailError = 'WEAK_PASSWORD : ' + invalidPasswordMsg;
-    }  
+    } else if (errors.email === invalidEmailMsg) {
+      detailError = "INVALID_EMAIL";
+    } else if (errors.password === missingPasswordMsg) {
+      detailError = "MISSING_PASSWORD";
+    } else if (errors.password === invalidPasswordMsg) {
+      detailError = "WEAK_PASSWORD : " + invalidPasswordMsg;
+    }
     console.log("detailError  " + detailError);
     console.log("Initially Detail Error " + errorDetail);
-    setErrorDetail(detailError);  
+    setErrorDetail((prevError) => (prevError = detailError));
     console.log("After Set Detail Error " + errorDetail);
-  }
-  const formValidations = (fieldName) => {  
-    let error = '';
-    if(fieldName==='password'){
+  };
+  const formValidations = (fieldName) => {
+    let error = noError;
+    if (fieldName === "password") {
       if (!inputs.password.trim()) {
         error = missingPasswordMsg;
-      }else if(inputs.password.length < 6){
+      } else if (inputs.password.length < 6) {
         error = invalidPasswordMsg;
       }
-    }else  if(fieldName==='email'){
+    } else if (fieldName === "email") {
       if (!inputs.email.trim()) {
         error = missingEmailMsg;
       } else if (!/^\S+@\S+\.\S+$/.test(inputs.email)) {
         error = invalidEmailMsg;
       }
-    } 
-    if (Object.keys(error).length !== 0) {
-      // Invalid form, set errors
-      console.log("Set Error " + error);
-      setErrors(values => ({...values, [fieldName]: error}))
     }
-  }
+    if (error !== noError) {
+      // Invalid form, set errors
+      console.log(fieldName + " Error occurs: " + error);
+      setErrors((values) => ({ ...values, [fieldName]: error }));
+    }
+  };
 
   return (
     <div className="login-body">
-    <form className="login-form">
-      {errorDetail && <p className="error-detail">{errorDetail}</p>}
-      <div className="form-element" >
-      <input 
-        type="email" 
-        name="email" 
-        placeholder="E-mail Address"
-        value={inputs.email} 
-        onChange={handleChange}
-        className={`${errors.email ? 'invalid_input' : ''}`}
-      />
-         {errors.email && <p className="error">{errors.email}</p>}
-      </div>
-      <div className="form-element">
-        <input 
-          type="password" 
-          name="password" 
-          placeholder="Password"
-          autoComplete="off"  
-          value={inputs.password} 
-          onChange={handleChange}
-          className={`${errors.password ? 'invalid_input' : ''}`}
-        />
-         {errors.password && <p className="error">{errors.password}</p>}
-      </div>
-        <button className="btn submit-btn form-element"
-                onClick={handleSubmit}>
-                  SUBMIT
-                  </button> 
-        <button className="btn sign-in-btn form-element"
-                onClick={handleSigIn}>
-                  {isToggle ? 'SIGNIN' : 'REGISTER'}
-                  </button>
-    </form>
+      <form className="login-form">
+        {errorDetail && <p className="error-detail">{errorDetail}</p>}
+        <div className="form-element">
+          <input
+            type="email"
+            name="email"
+            placeholder="E-mail Address"
+            value={inputs.email}
+            onChange={handleChange}
+            className={`${errors.email ? "invalid_input" : ""}`}
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+        <div className="form-element">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            autoComplete="off"
+            value={inputs.password}
+            onChange={handleChange}
+            className={`${errors.password ? "invalid_input" : ""}`}
+          />
+          {errors.password && <p className="error">{errors.password}</p>}
+        </div>
+        <button className="btn submit-btn form-element" onClick={handleSubmit}>
+          SUBMIT
+        </button>
+        <button className="btn sign-in-btn form-element" onClick={handleSigIn}>
+          {isToggle ? "SIGNIN" : "REGISTER"}
+        </button>
+      </form>
     </div>
-  )
+  );
 }
 
-  export default Login;
+export default Login;

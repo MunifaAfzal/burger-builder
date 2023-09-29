@@ -1,0 +1,25 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-element{
+    padding: 10px;
+    display: block;
+    width:auto;
+}
+
+.form-select-element{
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    font:inherit;
+    display: block;
+    width:100%;
+}
+
+.form-select-element:focus{ 
+        outline: none;
+        background-color: #ccc;
+        
+    
+}

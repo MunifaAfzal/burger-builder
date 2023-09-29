@@ -1,0 +1,147 @@
+ 
+ .summaryModal {
+    position: fixed;
+    z-index: 500;
+    background-color: #fff;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #000;
+    padding: 16px;
+    left: 30%;
+    top: 30%;
+    font-family: Open Sans,sans-serif !important;
+    max-width:500px;
+
+  
+}
+
+.ReactModal__Overlay{
+  background-color: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500; /* Ensure the overlay is above other elements */
+    
+}
+
+.title {
+    display: block;
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+}
+
+li {
+    display: list-item;
+}
+ 
+ /*
+model css
+
+.summaryModal {
+    position: fixed;
+    z-index: 500;
+    background-color: #fff;
+    width: 70%;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 1px 1px 1px #000;
+    box-shadow: 1px 1px 1px #000;
+    padding: 16px;
+    left: 15%;
+    top: 30%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.title {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
+user agent stylesheet
+div {
+    display: block;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Open Sans,sans-serif;
+}
+
+
+ Your Order Summary 
+
+
+ingredients List 
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+//cancel button
+
+.Button__Danger__18hYt {
+    color: #944317;
+}
+
+.Button__Button__ajevi {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: 700;
+}
+
+//Continue butotn
+
+.Button__Success__1DMln {
+    color: #5c9210;
+}
+.Button__Button__ajevi {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: 700;
+}
+
+
+ /*
+
+ */
