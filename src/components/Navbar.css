@@ -68,3 +68,22 @@
     color: #fff !important;
     cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+  .nav-header{
+    padding:0px 4px;
+  }
+
+  .logo-section{
+    padding: 4px;
+  }
+  .nav-btn{
+    font-size: 15px;
+    padding:18px 5px 15px 5px;
+  }
+
+.active-nav-btn{
+    font-size: 15px;
+    padding:18px 5px 15px 5px;
+}
+}

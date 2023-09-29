@@ -26,3 +26,14 @@
 .button-style:hover{
     background-color:rgb(174, 203, 56);
 }
+
+
+@media screen and (max-width: 400px) {
+    .ingredients-section{
+        padding: 5px;
+    }
+    .button-style{
+        width:auto;   
+        margin:4px;
+    }
+}

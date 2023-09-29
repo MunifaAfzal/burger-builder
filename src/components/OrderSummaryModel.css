@@ -43,6 +43,12 @@ ul {
 li {
     display: list-item;
 }
+
+@media screen and (max-width: 576px) {
+    .border-container{
+        width:50%;
+    }
+}
  
  /*
 model css

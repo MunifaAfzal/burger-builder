@@ -26,11 +26,47 @@
     margin: 2px auto;
 }
 
-
 .no-ingredients{
     height:27px;
     text-align: center;
     font-weight: 700;
     font-size: 1.2rem;
     margin:7px 0px;
+}
+
+@media screen and (max-width: 400px) {
+    .burger{
+        min-height:250px  !important;
+        max-height:200px !important;
+    }
+    .burger-parts{
+        width: 90% !important;
+    }
+    .burger-parts-lettuce{
+        width:96% !important;
+    }
+    .burger-parts-Cheese{
+        width:99% !important; 
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .burger{
+        min-height:400px;
+        max-height:400px;
+        width:auto;
+    }
+    .burger-parts{
+        width:auto;
+        margin: 2px auto;
+    }
+    .burger-parts-lettuce{
+        width:auto;
+        margin: 2px auto;
+    }
+    .burger-parts-Cheese{
+        width:auto;
+        margin: 2px auto;
+    }
 }

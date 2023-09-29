@@ -73,3 +73,9 @@ input:focus {
 .sign-in-btn{
     color: #944317;
 }
+
+@media screen and (max-width: 576px) {
+    .login-form{
+        width:auto;
+    }
+}
