@@ -1,12 +1,12 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BurgerBuilderBase from "./components/BurgerBuilderBase";
-import Login from "./components/Login";
-import Orders from "./components/Orders";
+import BurgerBuilderBase from "./components/BurgerBuilderBase/BurgerBuilderBase";
+import Login from "./components/Login/Login";
+import Orders from "./components/Orders/Orders";
 import { useEffect, useState } from "react";
-import OrderProcess from "./components/OrderProcess";
-import NoPageFound from "./components/NoPageFound";
+import OrderProcess from "./components/OrderProcess/OrderProcess";
+import NoPageFound from "./components/NoPageFound/NoPageFound";
 
 export default function App() {
   const [orderList, setOrderList] = useState([]);
@@ -67,10 +67,7 @@ export default function App() {
             />
           }
         />
-        <Route
-          path="/auth"
-          element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />}
-        />
+        <Route path="/auth" element={<Login setIsLogin={setIsLogin} />} />
         <Route
           path="/Orders"
           element={<Orders ingredients={ingredients} orderList={orderList} />}

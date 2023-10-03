@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import SelectIngredients from "./SelectIngredients";
-import BurgerImage from "./BurgerImage";
+import React, { useEffect } from "react";
+import SelectIngredients from "../SelectIngredients/SelectIngredients";
+import BurgerImage from "../BurgerImage/BurgerImage";
 
 export default function BurgerBuilderBase({
   isLogin,

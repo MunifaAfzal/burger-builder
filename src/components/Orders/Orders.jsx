@@ -1,6 +1,6 @@
 import React from "react";
 import "./Orders.css";
-import PrintOrder from "./PrintOrder";
+import PrintOrder from "../PrintOrder/PrintOrder";
 
 export default function Orders({ ingredients, orderList }) {
   return (

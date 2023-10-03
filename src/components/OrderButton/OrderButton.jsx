@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import OrderSummaryModal from "./OrderSummaryModal";
+import OrderSummaryModal from "../OrderSummaryModal/OrderSummaryModal";
 import "./OrderButton.css";
 
 export default function OrderButton({

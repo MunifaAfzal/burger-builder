@@ -1,5 +1,5 @@
 import React from "react";
-import PriceCalculator from "./PriceCalculator";
+import PriceCalculator from "../PriceCalculator/PriceCalculator";
 import "./PrintOrder.css";
 
 export default function PrintOrder({ ingredients, ingredientCounts }) {

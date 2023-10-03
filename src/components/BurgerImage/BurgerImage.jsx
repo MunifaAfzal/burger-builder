@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./BurgerImage.css";
-import burgerBreadTop from "./images/burger-bread-top.png";
-import burgerBreadBottom from "./images/burger-bread-bottom.png";
-import burgerLettuce from "./images/burger-lettuce.png";
-import burgerBacon from "./images/burger-bacon.png";
-import burgerCheese from "./images/burger-cheese.png";
-import burgerMeat from "./images/burger-meat.png";
+import burgerBreadTop from "../images/burger-bread-top.png";
+import burgerBreadBottom from "../images/burger-bread-bottom.png";
+import burgerLettuce from "../images/burger-lettuce.png";
+import burgerBacon from "../images/burger-bacon.png";
+import burgerCheese from "../images/burger-cheese.png";
+import burgerMeat from "../images/burger-meat.png";
 
 export default function BurgerImage({ ingredients, ingredientCounts }) {
   const Lettuce = "Lettuce";

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SelectIngredients from "./SelectIngredients";
-import BurgerImage from "./BurgerImage";
-import OrderSummaryModal from "./OrderSummaryModal";
+import BurgerImage from "../BurgerImage/BurgerImage";
 import "./OrderProcess.css";
-import Form from "./Form";
-import GreenButton from "./GreenButton";
-import BrownButton from "./BrownButton";
+import Form from "../Form/Form";
+import GreenButton from "../GreenButton/GreenButton";
+import BrownButton from "../BrownButton/BrownButton";
 
 export default function OrderProcess({
   ingredients,

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Ingredient from "./Ingredient";
+import React, { useEffect } from "react";
+import Ingredient from "../Ingredient/Ingredient";
 import "./SelectIngredients.css";
-import PriceCalculator from "./PriceCalculator";
-import OrderSummaryModal from "./OrderSummaryModal";
-import OrderButton from "./OrderButton";
+import PriceCalculator from "../PriceCalculator/PriceCalculator";
+import OrderButton from "../OrderButton/OrderButton";
 
 export default function SelectIngredients({
   isLogin,

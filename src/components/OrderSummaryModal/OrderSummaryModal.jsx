@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
 import "./OrderSummaryModel.css";
-import PriceCalculator from "./PriceCalculator";
-import BrownButton from "./BrownButton";
-import GreenButton from "./GreenButton";
+import PriceCalculator from "../PriceCalculator/PriceCalculator";
+import BrownButton from "../BrownButton/BrownButton";
+import GreenButton from "../GreenButton/GreenButton";
 
 export default function OrderSummaryModal({
   ingredientCounts,

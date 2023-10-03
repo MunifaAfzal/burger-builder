@@ -83,7 +83,7 @@ export default function NavBar({ isLogin, setIsLogin }) {
         <div className="logo-section">
           <img
             className="logo"
-            src={require("./images/burger-logo.png")}
+            src={require("../images/burger-logo.png")}
             alt="Burger Logo"
           ></img>
         </div>

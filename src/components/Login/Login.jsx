@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import Navbar from "./Navbar";
 
-function Login({ isLogin, setIsLogin }) {
+function Login({ setIsLogin }) {
   const noError = "";
   const [inputs, setInputs] = useState({
     email: "",
